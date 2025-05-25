@@ -49,17 +49,18 @@ const register = async (req, res) => {
 // Login user
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    // Find user by username
-    const user = await UserModel.findByUsername(username);
-
-    if (!user) {
-      return res.status(401).json({
+    // Find user by email
+    if (!email || !password) {
+      return res.status(400).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Email and password are required",
       });
     }
+    const user = await UserModel.findByEmail(email);
+
+ 
 
     // Compare passwords
     const isPasswordValid = await bcrypt.compare(password, user.password);
