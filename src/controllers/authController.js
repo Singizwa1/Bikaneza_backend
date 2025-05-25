@@ -52,13 +52,14 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     // Find user by email
+     const user = await UserModel.findByEmail(email);
     if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "Email and password are required",
       });
     }
-    const user = await UserModel.findByEmail(email);
+    
 
  
 

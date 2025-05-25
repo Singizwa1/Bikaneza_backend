@@ -101,12 +101,12 @@ const validateRegistration = (req, res, next) => {
 
 const validateLogin = (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Username and password are required",
+        message: "email and password are required",
       });
     }
 
